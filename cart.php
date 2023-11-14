@@ -80,7 +80,7 @@ $item  = $conn->query($sql_cart);
                             <td id="subtotal-<?php echo $row["id"] ?>">৳<?php echo $row["price"] ?></td>
                             <td>
                                 <input type="hidden" id="price-<?php echo $row["id"] ?>" value="<?php echo $row["price"] ?>">
- 
+
                             </td>
                         </tr>
                     <?php } ?>
@@ -93,33 +93,39 @@ $item  = $conn->query($sql_cart);
     <section class="section-p1" id="cart-add">
         <div id="coupon">
             <h3>Apply Coupon</h3>
+
+            <!-- Inside the #coupon div -->
             <div>
-                <input type="text" placeholder="Enter your coupon">
-                <button class="normal">Apply</button>
+                <input type="text" id="coupon-input" placeholder="Enter your coupon">
+                <button class="normal" onclick="applyCoupon()">Apply</button>
             </div>
+
+
         </div>
         <div id="subtotal">
-            <h3>Cart total</h3>
-            <table>
-                <tr>
-                    <td>Cart Subtotal</td>
-                    <td>$80</td>
-                </tr>
-                <tr>
-                    <td>Shipping</td>
-                    <td>Free</td>
-                </tr>
-                <tr>
-                    <td>Discount</td>
-                    <td>$50</td>
-                </tr>
-                <tr>
-                    <td><Strong>Total</Strong></td>
-                    <td><Strong>$335</Strong></td>
-                </tr>
-            </table>
-            <button class="normal">Proceed to Checkout</button>
+            <div id="subtotal">
+                <h3>Cart total</h3>
+                <table>
+                    <tr>
+                        <td>Cart Subtotal</td>
+                        <td id="cart-subtotal">৳0</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td id="capp">Coupoun Discount</td>
+                        <td id="discount">৳0</td>
+                    </tr>
+                    <tr>
+                        <td><Strong>Total</Strong></td>
+                        <td id="totalpay"><Strong>৳0</Strong></td>
+                    </tr>
 
+                </table>
+                <button class="normal">Proceed to Checkout</button>
+            </div>
         </div>
     </section>
 

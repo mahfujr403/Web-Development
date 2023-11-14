@@ -49,36 +49,47 @@ $item  = $conn->query($sql_cart);
     </section>
 
     <div id="cart" class="section-p1">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <td>Remove</td>
-                    <td>Image</td>
-                    <td>Product</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
-                    <td>Sub-total</td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($row = mysqli_fetch_assoc($item)) {
-                ?>
+        <form method="post" id="cart-form">
+            <table>
+                <thead>
                     <tr>
-                        <td><a href="#"><i class="fa-regular fa-trash-can"></i></a></td>
-                        <td><img src="img/products/<?php echo $row["image"] ?>" alt=""></td>
-                        <td><?php echo $row["name"] ?></td>
-                        <td>৳<?php echo $row["price"] ?></td>
-                        <td><input type="number" value="1" min="1"></td>
-                        <td><b>৳<?php echo $row["price"] ?></b></td>
+                        <th>Remove</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Sub-total</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($item)) { ?>
+                        <tr>
+                            <td>
+                                <button class="dlt">
+                                    <i data-id="<?php echo $row["id"] ?>" class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <img src="img/products/<?php echo $row["image"] ?>" alt="">
+                            </td>
+                            <td><?php echo $row["name"] ?></td>
+                            <td>৳<?php echo $row["price"] ?></td>
+                            <td>
+                                <input type="number" name="itemQuantity" value="1" min="0" max="15" data-product-id="<?php echo $row["id"] ?>" onchange="updateSubtotal(this)">
+                            </td>
+                            <td id="subtotal-<?php echo $row["id"] ?>">৳<?php echo $row["price"] ?></td>
+                            <td>
+                                <input type="hidden" id="price-<?php echo $row["id"] ?>" value="<?php echo $row["price"] ?>">
+ 
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </form>
+
     </div>
-    
+
     <section class="section-p1" id="cart-add">
         <div id="coupon">
             <h3>Apply Coupon</h3>
@@ -88,26 +99,26 @@ $item  = $conn->query($sql_cart);
             </div>
         </div>
         <div id="subtotal">
-           <h3>Cart total</h3>
-           <table>
-            <tr>
-                <td>Cart Subtotal</td>
-                <td>$80</td>
-            </tr>
-            <tr>
-                <td>Shipping</td>
-                <td>Free</td>
-            </tr>
-            <tr>
-                <td>Discount</td>
-                <td>$50</td>
-            </tr>
-            <tr>
-                <td><Strong>Total</Strong></td>
-                <td><Strong>$335</Strong></td>
-            </tr>
-           </table>
-           <button class="normal">Proceed to Checkout</button>
+            <h3>Cart total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>$80</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td>$50</td>
+                </tr>
+                <tr>
+                    <td><Strong>Total</Strong></td>
+                    <td><Strong>$335</Strong></td>
+                </tr>
+            </table>
+            <button class="normal">Proceed to Checkout</button>
 
         </div>
     </section>
@@ -163,7 +174,9 @@ $item  = $conn->query($sql_cart);
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="cart.js"></script>
+
+
 </body>
 
 </html>

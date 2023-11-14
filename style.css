@@ -892,6 +892,16 @@ footer a:hover {
   padding: 18px 0px;
 }
 
+#cart table tbody td button {
+  color: rgb(255, 18, 18);
+  font-size: 22px;
+  border: none;
+}
+
+#cart table tbody td button:active {
+  font-size: 18px;
+}
+
 #cart table tbody tr td {
   padding: 15px;
 }

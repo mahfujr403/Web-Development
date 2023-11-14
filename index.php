@@ -37,7 +37,6 @@ $item  = $conn->query($sql_featured);
       </ul>
     </div>
   </section>
-
   <section id="hero">
     <h4>Trade-in-offer</h4>
     <h2>Super value deals</h2>

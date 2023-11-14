@@ -44,8 +44,8 @@ $item  = $conn->query($sql_cart);
     </section>
 
     <section id="page-header" class="about-header">
-        <h2>#We Are Here</h2>
-        <p>LEAVE A MESSAGE, We love to hear from you!</p>
+        <h2>#Try once_keep forever</h2>
+        <p>We are committed to your satisfaction</p>
     </section>
 
     <div id="cart" class="section-p1">
@@ -102,7 +102,7 @@ $item  = $conn->query($sql_cart);
 
 
         </div>
-        <div id="subtotal">
+
             <div id="subtotal">
                 <h3>Cart total</h3>
                 <table>
@@ -126,8 +126,22 @@ $item  = $conn->query($sql_cart);
                 </table>
                 <button class="normal">Proceed to Checkout</button>
             </div>
-        </div>
+      
     </section>
+
+      <section id="newsletter" class="section-p1">
+    <div class="newstext">
+      <h4>Sign Up For Newsletters</h4>
+      <p>
+        Get e-mail updates about our leatest shop and
+        <span>special offers.</span>
+      </p>
+    </div>
+    <div class="form">
+      <input type="email" placeholder="Your e-mail address" />
+      <button class="normal">Sign Up</button>
+    </div>
+  </section>
 
     <footer class="section-p1">
         <div class="col">
@@ -179,6 +193,7 @@ $item  = $conn->query($sql_cart);
             </div>
         </div>
     </footer>
+
 
     <script src="cart.js"></script>
 

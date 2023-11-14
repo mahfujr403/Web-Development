@@ -292,7 +292,10 @@ body {
   transform: all 300ms ease;
 }
 
-#product1 .pro-container .pro button:active {
+#product1 .pro-container .pro button:active,
+#subtotal button:active,
+#coupon button:active,
+#cart table tbody td button:active  {
   font-size: 13px;
   background-color: #041e42;
 }
@@ -898,9 +901,7 @@ footer a:hover {
   border: none;
 }
 
-#cart table tbody td button:active {
-  font-size: 18px;
-}
+
 
 #cart table tbody tr td {
   padding: 15px;
@@ -951,13 +952,18 @@ footer a:hover {
 }
 
 #subtotal table {
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
 #subtotal table td {
-  width: 50%;
+  width: 70%;
   border: 1px solid #e2e9e1;
   padding: 10px;
   font-size: 13px;
 }
+#subtotal button{
+  margin-left: 33%;
+}
+

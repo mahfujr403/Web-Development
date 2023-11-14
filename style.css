@@ -284,6 +284,19 @@ body {
   padding-top: 20px;
   flex-wrap: wrap;
 }
+#product1 .pro-container .pro button{
+   background-color: #088178;
+  color: #fff;
+  width: 75%;
+  height: auto;
+  transform: all 300ms ease;
+}
+
+#product1 .pro-container .pro button:active{
+   font-size: 13px;
+   background-color: #041e42;
+}
+
 
 #banner {
   display: flex;

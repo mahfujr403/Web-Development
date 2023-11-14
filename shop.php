@@ -2,11 +2,10 @@
 
 $conn = new  mysqli('localhost', 'root', '', 'product');
 
-$sql_featured = "SELECT * FROM featured_product";
-$featured  = $conn->query($sql_featured);
+$sql_featured = "SELECT * FROM all_products";
+$item  = $conn->query($sql_featured);
 
-$sql_newArrival = "SELECT * FROM new_arrivals";
-$newArrival  = $conn->query($sql_newArrival);
+
 
 ?>
 
@@ -50,11 +49,11 @@ $newArrival  = $conn->query($sql_newArrival);
     <div class="pro-container">
 
       <?php
-      while ($row = mysqli_fetch_assoc($featured)) {
+      while ($row = mysqli_fetch_assoc($item)) {
       ?>
-        <div class="pro" onclick="window.location.href='sproduct.html'">
-          <img src="<?php echo $row["image"] ?>" alt="" />
-          <div class="des">
+        <div class="pro">
+          <img onclick="window.location.href='sproduct.html'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <div onclick="window.location.href='sproduct.html'" class="des">
             <span><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
@@ -77,47 +76,13 @@ $newArrival  = $conn->query($sql_newArrival);
             </div>
             <h4>৳<?php echo $row["price"] ?></h4>
           </div>
-          <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
+          <button class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
         </div>
 
       <?php
       }
       ?>
 
-      <?php
-      while ($row = mysqli_fetch_assoc($newArrival)) {
-      ?>
-        <div class="pro" onclick="window.location.href='sproduct.html'">
-          <img src="<?php echo $row["image"] ?>" alt="" />
-          <div class="des">
-            <span><?php echo $row["brand"] ?></span>
-            <h5><?php echo $row["name"] ?></h5>
-            <div class="star">
-              <?php
-              $rating =  $row["rating"];
-              for ($x = 1; $x <= $rating; $x++) {
-              ?>
-                <i class="fa-solid fa-star"></i>
-              <?php
-              }
-              ?>
-              <?php
-              $rating =  $row["rating"];
-              for ($x = $rating + 1; $x <= 5; $x++) {
-              ?>
-                <i class="fa-regular fa-star"></i>
-              <?php
-              }
-              ?>
-            </div>
-            <h4>৳<?php echo $row["price"] ?></h4>
-          </div>
-          <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-        </div>
-
-      <?php
-      }
-      ?>
 
 
     </div>
@@ -193,6 +158,43 @@ $newArrival  = $conn->query($sql_newArrival);
       </div>
     </div>
   </footer>
+
+  <script>
+    var product_id = document.getElementsByClassName("add");
+    for (var i = 0; i < product_id.length; i++) {
+      product_id[i].addEventListener("click", function(event) {
+        var target = event.target;
+        var add_id = target.getAttribute("data-id");
+        var add_name = target.getAttribute("data-name");
+        var add_image = target.getAttribute("data-image");
+        var add_brand = target.getAttribute("data-brand");
+        var add_price = target.getAttribute("data-price");
+        var add_rating = target.getAttribute("data-rating");
+
+        var xhr = new XMLHttpRequest();
+        var data = new FormData();
+        data.append('image', add_image);
+        data.append('brand', add_brand);
+        data.append('name', add_name);
+        data.append('price', add_price);
+        data.append('rating', add_rating);
+        data.append('id', add_id);
+
+        xhr.open('POST', 'insert_product.php');
+        xhr.send(data);
+
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            target.textContent = 'Added to Cart';
+            console.log(add_name + 'is added to cart successfully');
+          } else {
+            console.error('Failed to add product:', xhr.statusText);
+          }
+        }
+      });
+
+    }
+  </script>
 
   <script src="script.js"></script>
 </body>

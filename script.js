@@ -10,3 +10,6 @@ for (let i = 0; i < smallimg.length; i++) {
     MainImg.src = smallimg[i].src;
   };
 }
+
+
+

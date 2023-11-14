@@ -1,16 +1,8 @@
 <?php
 
 $conn = new  mysqli('localhost', 'root', '', 'product');
-
-$sql_featured = "SELECT * FROM featured_product";
-$featured  = $conn->query($sql_featured);
-
-$sql_newArrival = "SELECT * FROM new_arrivals";
-$newArrival  = $conn->query($sql_newArrival);
-
-$conn = new  mysqli('localhost', 'root', '', 'others');
-$feature_img = "SELECT * FROM  feature";
-$feature  = $conn->query($feature_img);
+$sql_featured = "SELECT * FROM all_products";
+$item  = $conn->query($sql_featured);
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +14,7 @@ $feature  = $conn->query($feature_img);
   <title>Fashtech</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
+
 </head>
 
 <body>
@@ -37,7 +30,8 @@ $feature  = $conn->query($feature_img);
         <li><a href="contact.php"> Contact</a></li>
         <li>
           <a href="cart.php">
-            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="badge"><i class="fa-solid fa-bag-shopping"></i></span>
+
           </a>
         </li>
       </ul>
@@ -53,16 +47,31 @@ $feature  = $conn->query($feature_img);
   </section>
 
   <section id="feature" class="section-p1">
-    <?php
-    while ($row = mysqli_fetch_assoc($feature)) {
-    ?>
-      <div class="fe-box">
-        <img src="<?php echo $row["image"] ?>" alt="" />
-        <h6><?php echo $row["name"] ?></h6>
-      </div>
-    <?php
-    }
-    ?>
+    <div class="fe-box">
+      <img src="img\features\f1.png" alt="" />
+      <h6>Free Shipping</h6>
+    </div>
+    <div class="fe-box">
+      <img src="img\features\f2.png" alt="" />
+      <h6>Online Order</h6>
+    </div>
+    <div class="fe-box">
+      <img src="img\features\f3.png" alt="" />
+      <h6>Save Moneyg</h6>
+    </div>
+    <div class="fe-box">
+      <img src="img\features\f4.png" alt="" />
+      <h6>Promotions</h6>
+    </div>
+    <div class="fe-box">
+      <img src="img\features\f5.png" alt="" />
+      <h6>Happy Sell</h6>
+    </div>
+    <div class="fe-box">
+      <img src="img\features\f6.png" alt="" />
+      <h6>F24/7 Support</h6>
+    </div>
+
   </section>
 
   <section id="product1" class="section-p1">
@@ -71,11 +80,16 @@ $feature  = $conn->query($feature_img);
     <div class="pro-container">
 
       <?php
-      while ($row = mysqli_fetch_assoc($featured)) {
+      $p = 1;
+      while ($row = mysqli_fetch_assoc($item)) {
+        if ($p > 8) {
+          break;
+        }
+        $p++;
       ?>
         <div class="pro">
-          <img src="<?php echo $row["image"] ?>" alt="" />
-          <div class="des">
+          <img  onclick="window.location.href='sproduct.html'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <div  onclick="window.location.href='sproduct.html'" class="des">
             <span><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
@@ -98,9 +112,10 @@ $feature  = $conn->query($feature_img);
             </div>
             <h4>৳<?php echo $row["price"] ?></h4>
           </div>
-          <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
+          <button class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
         </div>
       <?php
+
       }
       ?>
 
@@ -119,12 +134,13 @@ $feature  = $conn->query($feature_img);
     <div class="pro-container">
 
       <?php
-      while ($row = mysqli_fetch_assoc($newArrival)) {
+      mysqli_data_seek($item, 8);
+      while ($row = mysqli_fetch_assoc($item)) {
       ?>
         <div class="pro">
-          <img src="<?php echo $row["image"] ?>" alt="" />
-          <div class="des">
-            <span><?php echo $row["brand"] ?></span>
+          <img  onclick="window.location.href='sproduct.html'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <div  onclick="window.location.href='sproduct.html'" class="des">
+            <span name="add_brand"><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
               <?php
@@ -146,8 +162,7 @@ $feature  = $conn->query($feature_img);
             </div>
             <h4>৳<?php echo $row["price"] ?></h4>
           </div>
-          <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-         
+          <button  class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
         </div>
 
       <?php
@@ -252,6 +267,47 @@ $feature  = $conn->query($feature_img);
       </div>
     </div>
   </footer>
+
+
+  <script>
+    var product_id = document.getElementsByClassName("add");
+    for (var i = 0; i < product_id.length; i++) {
+      product_id[i].addEventListener("click", function(event) {
+
+          var target = event.target;
+          var add_id = target.getAttribute("data-id");
+          var add_name = target.getAttribute("data-name");
+          var add_image = target.getAttribute("data-image");
+          var add_brand = target.getAttribute("data-brand");
+          var add_price = target.getAttribute("data-price");
+          var add_rating = target.getAttribute("data-rating");
+
+          var xhr = new XMLHttpRequest();
+          var data = new FormData();
+          data.append('image', add_image);
+          data.append('brand', add_brand);
+          data.append('name', add_name);
+          data.append('price', add_price);
+          data.append('rating', add_rating);
+          data.append('id', add_id);
+
+          xhr.open('POST', 'insert_product.php');
+          xhr.send(data);
+
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              target.textContent = 'Added to Cart';
+              console.log(add_name +'is added to cart successfully');
+            } else {
+              console.error('Failed to add product:', xhr.statusText);
+            }
+    }});
+
+    }
+
+        
+      
+  </script>
 
   <script src="script.js"></script>
 </body>

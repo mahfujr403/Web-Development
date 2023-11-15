@@ -169,7 +169,6 @@ $people  = $conn->query($sql1);
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 
 </html>

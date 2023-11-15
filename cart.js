@@ -14,9 +14,11 @@ for (var i = 0; i < product_id.length; i++) {
 
     xhr.onload = function () {
       if (xhr.status === 200) {
-        console.log(dlt_name + "is removed from cart successfully");
+        console.log(dlt_id + " is removed from cart successfully");
+        // After removing the product, update the subtotal and total
+        updateCartSubtotalAndDiscount();
       } else {
-        console.error("Failed to add product:", xhr.statusText);
+        console.error("Failed to remove product:", xhr.statusText);
       }
     };
   });
@@ -74,7 +76,6 @@ function updateCartSubtotalAndDiscount() {
   cartSubtotalElement.textContent = `৳${totalCartSubtotal}`;
 
   // Update the discount element
-   
   const discountElement = document.getElementById("discount");
   discountElement.textContent = `৳${couponDiscount}`;
 
@@ -82,6 +83,8 @@ function updateCartSubtotalAndDiscount() {
   const total = totalCartSubtotal - couponDiscount;
   const totalElement = document.getElementById("totalpay");
   totalElement.textContent = `৳${total}`;
+
+ 
 }
 
 // Function to apply the coupon and update the total

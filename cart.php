@@ -62,28 +62,39 @@ $item  = $conn->query($sql_cart);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($item)) { ?>
+                    <?php
+                    if (mysqli_num_rows($item) > 0) {
+                        while ($row = mysqli_fetch_assoc($item)) { ?>
+                            <tr>
+                                <td>
+                                    <button class="dlt">
+                                        <i data-id="<?php echo $row["id"] ?>" class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <img src="img/products/<?php echo $row["image"] ?>" alt="">
+                                </td>
+                                <td><?php echo $row["name"] ?></td>
+                                <td>৳<?php echo $row["price"] ?></td>
+                                <td>
+                                    <input type="number" name="itemQuantity" value="1" min="0" max="15" data-product-id="<?php echo $row["id"] ?>" onchange="updateSubtotal(this)">
+                                </td>
+                                <td id="subtotal-<?php echo $row["id"] ?>">৳<?php echo $row["price"] ?></td>
+                                <td>
+                                    <input type="hidden" id="price-<?php echo $row["id"] ?>" value="<?php echo $row["price"] ?>">
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                    } else {
+                        ?>
                         <tr>
-                            <td>
-                                <button class="dlt">
-                                    <i data-id="<?php echo $row["id"] ?>" class="fa-regular fa-trash-can"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <img src="img/products/<?php echo $row["image"] ?>" alt="">
-                            </td>
-                            <td><?php echo $row["name"] ?></td>
-                            <td>৳<?php echo $row["price"] ?></td>
-                            <td>
-                                <input type="number" name="itemQuantity" value="1" min="0" max="15" data-product-id="<?php echo $row["id"] ?>" onchange="updateSubtotal(this)">
-                            </td>
-                            <td id="subtotal-<?php echo $row["id"] ?>">৳<?php echo $row["price"] ?></td>
-                            <td>
-                                <input type="hidden" id="price-<?php echo $row["id"] ?>" value="<?php echo $row["price"] ?>">
-
-                            </td>
+                            <td colspan="7"> <span>No item in Cart</span></td>
                         </tr>
-                    <?php } ?>
+                    <?php
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </form>
@@ -103,45 +114,49 @@ $item  = $conn->query($sql_cart);
 
         </div>
 
-            <div id="subtotal">
-                <h3>Cart total</h3>
-                <table>
-                    <tr>
-                        <td>Cart Subtotal</td>
-                        <td id="cart-subtotal">৳0</td>
-                    </tr>
-                    <tr>
-                        <td>Shipping</td>
-                        <td>Free</td>
-                    </tr>
-                    <tr>
-                        <td id="capp">Coupoun Discount</td>
-                        <td id="discount">৳0</td>
-                    </tr>
-                    <tr>
-                        <td><Strong>Total</Strong></td>
-                        <td id="totalpay"><Strong>৳0</Strong></td>
-                    </tr>
+        <div id="subtotal">
+            <h3>Cart total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="cart-subtotal">৳0</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td id="capp">Coupoun Discount</td>
+                    <td id="discount">৳0</td>
+                </tr>
+                <tr>
+                    <td><Strong>Total</Strong></td>
+                    <td id="totalpay"><Strong>৳0</Strong></td>
+                </tr>
 
-                </table>
-                <button class="normal">Proceed to Checkout</button>
-            </div>
-      
+            </table>
+            <?php
+            if (mysqli_num_rows($item) > 0){
+                echo ' <button class="normal">Proceed to Checkout</button>';
+            }             
+            ?>
+        </div>
+
     </section>
 
-      <section id="newsletter" class="section-p1">
-    <div class="newstext">
-      <h4>Sign Up For Newsletters</h4>
-      <p>
-        Get e-mail updates about our leatest shop and
-        <span>special offers.</span>
-      </p>
-    </div>
-    <div class="form">
-      <input type="email" placeholder="Your e-mail address" />
-      <button class="normal">Sign Up</button>
-    </div>
-  </section>
+    <section id="newsletter" class="section-p1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4>
+            <p>
+                Get e-mail updates about our leatest shop and
+                <span>special offers.</span>
+            </p>
+        </div>
+        <div class="form">
+            <input type="email" placeholder="Your e-mail address" />
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
 
     <footer class="section-p1">
         <div class="col">

@@ -917,6 +917,11 @@ footer a:hover {
   font-size: 13px;
 }
 
+#cart table tbody tr td span{
+  font-size: 18px;
+  font-weight: 500;
+}
+
 #cart-add {
   display: flex;
   flex-wrap: wrap;

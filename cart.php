@@ -48,7 +48,7 @@ $item  = $conn->query($sql_cart);
         <p>We are committed to your satisfaction</p>
     </section>
 
-    <div id="cart" class="section-p1">
+    <section id="cart" class="section-p1">
         <form method="post" id="cart-form">
             <table>
                 <thead>
@@ -99,7 +99,7 @@ $item  = $conn->query($sql_cart);
             </table>
         </form>
 
-    </div>
+    </section>
 
     <section class="section-p1" id="cart-add">
         <div id="coupon">

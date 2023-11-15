@@ -5,7 +5,7 @@ $conn = new mysqli('localhost', 'root', '', 'product');
 
 // Check the connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  die("Connection failed: " . $conn->connect_error);
 }
 // Retrieve the product ID from the URL parameter
 if (isset($_GET['id'])) {
@@ -25,7 +25,19 @@ if (isset($_GET['id'])) {
   // Handle the case when the ID parameter is not set
   echo "Product ID not provided!";
 }
+
+
+
+
+$conn = new  mysqli('localhost', 'root', '', 'product');
+
+$sql_featured = "SELECT * FROM all_products";
+$item  = $conn->query($sql_featured);
+
+
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -63,20 +75,20 @@ if (isset($_GET['id'])) {
     <div class="single-pro-img">
       <img src="img/products/<?php echo $product["image"]; ?>" width="100%" height="70%" id="MainImg" />
       <!-- ... other product images ... -->
-        <div class="small-img-group">
-          <div class="small-img-col">
-            <img src="img/products/f1.jpg" width="100%"  height="70%" class="small-img" />
-          </div>
-          <div class="small-img-col">
-            <img src="img/products/f2.jpg" width="100%"  height="70%" class="small-img" />
-          </div>
-          <div class="small-img-col">
-            <img src="img/products/f3.jpg" width="100%"  height="70%" class="small-img" />
-          </div>
-          <div class="small-img-col">
-            <img src="img/products/f4.jpg" width="100%"  height="70%" class="small-img" />
-          </div>
+      <div class="small-img-group">
+        <div class="small-img-col">
+          <img src="img/products/f1.jpg" width="100%" height="70%" class="small-img" />
         </div>
+        <div class="small-img-col">
+          <img src="img/products/f2.jpg" width="100%" height="70%" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img src="img/products/f3.jpg" width="100%" height="70%" class="small-img" />
+        </div>
+        <div class="small-img-col">
+          <img src="img/products/f4.jpg" width="100%" height="70%" class="small-img" />
+        </div>
+      </div>
     </div>
 
     <div class="single-pro-details">
@@ -84,21 +96,21 @@ if (isset($_GET['id'])) {
       <h4><?php echo $product["name"]; ?></h4>
       <h2>৳<?php echo $product["price"]; ?></h2>
       <!-- ... other product details ... -->
-         <select>
-          <option>Select Size</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-          <option>XXL</option>
-          <option>XXXL</option>
-        </select>
-        <h4>Product Details</h4>
-        <span>Premium Quality Sports t-shirts are smooth and comfortable. The
-          t-shirts are made with the finest quality polyester fabric, perfect
-          for casual or sports wear. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero deserunt nihil labore itaque autem aliquid alias asperiores sapiente ipsa, amet et velit, doloremque possimus quod nesciunt, exercitationem suscipit delectus?</span>
-          
-          <button class="add normal" data-id="<?php echo $product["id"] ?>" data-name="<?php echo $product["name"] ?>" data-brand="<?php echo $product["brand"] ?>" data-image="<?php echo $product["image"] ?>" data-price="<?php echo $product["price"] ?>" data-rating="<?php echo $product["rating"] ?>">Add to Cart</button>
+      <select>
+        <option>Select Size</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+        <option>XXL</option>
+        <option>XXXL</option>
+      </select>
+      <h4>Product Details</h4>
+      <span>Premium Quality Sports t-shirts are smooth and comfortable. The
+        t-shirts are made with the finest quality polyester fabric, perfect
+        for casual or sports wear. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero deserunt nihil labore itaque autem aliquid alias asperiores sapiente ipsa, amet et velit, doloremque possimus quod nesciunt, exercitationem suscipit delectus?</span>
+
+      <button class="add normal" data-id="<?php echo $product["id"] ?>" data-name="<?php echo $product["name"] ?>" data-brand="<?php echo $product["brand"] ?>" data-image="<?php echo $product["image"] ?>" data-price="<?php echo $product["price"] ?>" data-rating="<?php echo $product["rating"] ?>">Add to Cart</button>
     </div>
   </section>
 
@@ -106,73 +118,47 @@ if (isset($_GET['id'])) {
     <h2>Featured Products</h2>
     <p>Summer Collection New Modern Design</p>
     <div class="pro-container">
-      <div class="pro">
-        <img src="img/products/n1.jpg" alt="" />
-        <div class="des">
-          <span>adidad</span>
-          <h5>Catroon Astronaut t-shirt</h5>
-          <div class="star">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <h4>৳78</h4>
-        </div>
-        <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-      </div>
 
-      <div class="pro">
-        <img src="img/products/n2.jpg" alt="" />
-        <div class="des">
-          <span>adidad</span>
-          <h5>Catroon Astronaut t-shirt</h5>
-          <div class="star">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
+      <?php
+      $p = 1;
+      while ($row = mysqli_fetch_assoc($item)) {
+        if ($p > 8) {
+          break;
+        }
+        $p++;
+      ?>
+        <div class="pro">
+          <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <div onclick="window.location.href='sproduct.php'" class="des">
+            <span><?php echo $row["brand"] ?></span>
+            <h5><?php echo $row["name"] ?></h5>
+            <div class="star">
+              <?php
+              $rating =  $row["rating"];
+              for ($x = 1; $x <= $rating; $x++) {
+              ?>
+                <i class="fa-solid fa-star"></i>
+              <?php
+              }
+              ?>
+              <?php
+              $rating =  $row["rating"];
+              for ($x = $rating + 1; $x <= 5; $x++) {
+              ?>
+                <i class="fa-regular fa-star"></i>
+              <?php
+              }
+              ?>
+            </div>
+            <h4>৳<?php echo $row["price"] ?></h4>
           </div>
-          <h4>৳78</h4>
+          <button class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
         </div>
-        <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-      </div>
+      <?php
 
-      <div class="pro">
-        <img src="img/products/n3.jpg" alt="" />
-        <div class="des">
-          <span>adidad</span>
-          <h5>Catroon Astronaut t-shirt</h5>
-          <div class="star">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <h4>৳78</h4>
-        </div>
-        <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-      </div>
+      }
+      ?>
 
-      <div class="pro">
-        <img src="img/products/n4.jpg" alt="" />
-        <div class="des">
-          <span>adidad</span>
-          <h5>Catroon Astronaut t-shirt</h5>
-          <div class="star">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <h4>৳78</h4>
-        </div>
-        <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-      </div>
     </div>
   </section>
 
@@ -241,9 +227,9 @@ if (isset($_GET['id'])) {
     </div>
   </footer>
 
- <script src="sproduct.js"></script>
- <script src="sendtoserver.js"></script>
-  
+  <script src="sproduct.js"></script>
+  <script src="sendtoserver.js"></script>
+
 
 </body>
 

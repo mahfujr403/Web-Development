@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 
   // Fetch product details from the database based on the product ID
   $sql_product = "SELECT * FROM all_products WHERE id = $product_id";
-$result_product = $conn->query($sql_product);
+  $result_product = $conn->query($sql_product);
 
   if ($result_product->num_rows > 0) {
     $product = $result_product->fetch_assoc();
@@ -61,15 +61,44 @@ $result_product = $conn->query($sql_product);
 
   <section id="prodetails" class="section-p1">
     <div class="single-pro-img">
-      <img src="img/products/<?php echo $product["image"]; ?>" width="100%" id="MainImg" />
+      <img src="img/products/<?php echo $product["image"]; ?>" width="100%" height="70%" id="MainImg" />
       <!-- ... other product images ... -->
+        <div class="small-img-group">
+          <div class="small-img-col">
+            <img src="img/products/f1.jpg" width="100%"  height="70%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="img/products/f2.jpg" width="100%"  height="70%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="img/products/f3.jpg" width="100%"  height="70%" class="small-img" />
+          </div>
+          <div class="small-img-col">
+            <img src="img/products/f4.jpg" width="100%"  height="70%" class="small-img" />
+          </div>
+        </div>
     </div>
 
     <div class="single-pro-details">
       <h6><?php echo $product["brand"]; ?></h6>
-      <h3><?php echo $product["name"]; ?></h3>
+      <h4><?php echo $product["name"]; ?></h4>
       <h2>৳<?php echo $product["price"]; ?></h2>
       <!-- ... other product details ... -->
+         <select>
+          <option>Select Size</option>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+          <option>XXL</option>
+          <option>XXXL</option>
+        </select>
+        <h4>Product Details</h4>
+        <span>Premium Quality Sports t-shirts are smooth and comfortable. The
+          t-shirts are made with the finest quality polyester fabric, perfect
+          for casual or sports wear. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero deserunt nihil labore itaque autem aliquid alias asperiores sapiente ipsa, amet et velit, doloremque possimus quod nesciunt, exercitationem suscipit delectus?</span>
+          
+          <button class="add normal" data-id="<?php echo $product["id"] ?>" data-name="<?php echo $product["name"] ?>" data-brand="<?php echo $product["brand"] ?>" data-image="<?php echo $product["image"] ?>" data-price="<?php echo $product["price"] ?>" data-rating="<?php echo $product["rating"] ?>">Add to Cart</button>
     </div>
   </section>
 
@@ -212,22 +241,10 @@ $result_product = $conn->query($sql_product);
     </div>
   </footer>
 
-  <!-- <script>
-      var MainImg = document.getElementById("MainImg");
-      var smallimg = document.getElementsByClassName("small-img");
+ <script src="sproduct.js"></script>
+ <script src="sendtoserver.js"></script>
+  
 
-      smallimg[0].onclick = function () {
-        MainImg.src = smallimg[0].src;
-      };
-
-      for (let i = 0; i < smallimg.length; i++) {
-        smallimg[i].onclick = function () {
-          MainImg.src = smallimg[i].src;
-        };
-      }
-    </script> -->
-
-  <script src="script.js"></script>
 </body>
 
 </html>

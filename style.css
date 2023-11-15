@@ -216,6 +216,7 @@ body {
 }
 
 #product1 .pro {
+  height: auto;
   width: 23%;
   min-width: 250px;
   padding: 12px 12px;
@@ -295,7 +296,8 @@ body {
 #product1 .pro-container .pro button:active,
 #subtotal button:active,
 #coupon button:active,
-#cart table tbody td button:active  {
+#cart table tbody td button:active,
+#prodetails .single-pro-details button:active  {
   font-size: 13px;
   background-color: #041e42;
 }
@@ -564,10 +566,7 @@ footer a:hover {
 }
 
 /* single product */
-#prodetails .single-pro-img {
-  width: 40%;
-  margin-right: 50px;
-}
+
 
 .small-img-group {
   display: flex;
@@ -583,14 +582,19 @@ footer a:hover {
   display: flex;
   margin-top: 20px;
 }
+#prodetails .single-pro-img {
+  width: 40%;
 
+  margin-right: 50px;
+}
 #prodetails .single-pro-details {
   width: 50%;
   padding-top: 30px;
 }
 
 #prodetails .single-pro-details h4 {
-  padding: 40px 0 20px 0;
+  padding: 10px 0 20px 0;
+  font-size: 18px;
 }
 
 #prodetails .single-pro-details h2 {
@@ -600,7 +604,7 @@ footer a:hover {
 #prodetails .single-pro-details select {
   display: block;
   padding: 5px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 #prodetails .single-pro-details input {
@@ -609,6 +613,7 @@ footer a:hover {
   padding-left: 10px;
   font-size: 16px;
   margin-right: 10px;
+
 }
 
 #prodetails .single-pro-details input :focus {
@@ -616,6 +621,7 @@ footer a:hover {
 }
 
 #prodetails .single-pro-details button {
+  margin-top: 20px;
   background-color: #088178;
   color: #fff;
 }
@@ -936,7 +942,8 @@ footer a:hover {
 }
 
 #coupon button,
-#subtotal button {
+#subtotal button,
+#prodetails .single-pro-details button{
   background-color: #088178;
   color: #fff;
   padding: 12px 20px;
@@ -966,4 +973,6 @@ footer a:hover {
 #subtotal button{
   margin-left: 33%;
 }
+
+
 

@@ -52,8 +52,8 @@ $item  = $conn->query($sql_featured);
       while ($row = mysqli_fetch_assoc($item)) {
       ?>
         <div class="pro">
-          <img onclick="window.location.href='sproduct.html'" src="img\products\<?php echo $row["image"] ?>" alt="" />
-          <div onclick="window.location.href='sproduct.html'" class="des">
+           <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <div onclick="window.location.href='sproduct.php'" class="des">
             <span><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
@@ -108,7 +108,7 @@ $item  = $conn->query($sql_featured);
     </div>
   </section>
 
-  <footer class="section-p1">
+   <footer class="section-p1">
     <div class="col">
       <img src="img/logo.png" class="logo" />
       <h4>Contact</h4>
@@ -129,17 +129,17 @@ $item  = $conn->query($sql_featured);
 
     <div class="col">
       <h4>About</h4>
-      <a href="#">About us</a>
+      <a href="about.php">About us</a>
       <a href="#">Delivary Information</a>
       <a href="#">Privacy ploicy</a>
       <a href="#">Trams & contidions</a>
-      <a href="#">Contact us</a>
+      <a href="contact.php">Contact us</a>
     </div>
 
     <div class="col">
       <h4>My Account</h4>
       <a href="#">Sign In</a>
-      <a href="#">View Cart</a>
+      <a href="cart.php">View Cart</a>
       <a href="#">My Wishlist</a>
       <a href="#">Track my order</a>
       <a href="#">Help</a>
@@ -159,44 +159,7 @@ $item  = $conn->query($sql_featured);
     </div>
   </footer>
 
-  <script>
-    var product_id = document.getElementsByClassName("add");
-    for (var i = 0; i < product_id.length; i++) {
-      product_id[i].addEventListener("click", function(event) {
-        var target = event.target;
-        var add_id = target.getAttribute("data-id");
-        var add_name = target.getAttribute("data-name");
-        var add_image = target.getAttribute("data-image");
-        var add_brand = target.getAttribute("data-brand");
-        var add_price = target.getAttribute("data-price");
-        var add_rating = target.getAttribute("data-rating");
-
-        var xhr = new XMLHttpRequest();
-        var data = new FormData();
-        data.append('image', add_image);
-        data.append('brand', add_brand);
-        data.append('name', add_name);
-        data.append('price', add_price);
-        data.append('rating', add_rating);
-        data.append('id', add_id);
-
-        xhr.open('POST', 'insert_product.php');
-        xhr.send(data);
-
-        xhr.onload = function() {
-          if (xhr.status === 200) {
-            target.textContent = 'Added to Cart';
-            console.log(add_name + 'is added to cart successfully');
-          } else {
-            console.error('Failed to add product:', xhr.statusText);
-          }
-        }
-      });
-
-    }
-  </script>
-
-  <script src="script.js"></script>
+  <script src="sendtoserver.js"></script>
 </body>
 
 </html>

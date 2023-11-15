@@ -109,58 +109,58 @@ $feature  = $conn->query($feature_img);
     </section>
 
 
-    <footer class="section-p1">
-        <div class="col">
-            <img src="img/logo.png" class="logo" />
-            <h4>Contact</h4>
-            <p><strong>Address: </strong>Shaheb Bazar, Rajshahi</p>
-            <p><strong>Phone: </strong>01771431724, 01521768694</p>
-            <p><strong>Open: </strong>10am-10pm, Sat-Thu</p>
+  
+   <footer class="section-p1">
+    <div class="col">
+      <img src="img/logo.png" class="logo" />
+      <h4>Contact</h4>
+      <p><strong>Address: </strong>Shaheb Bazar, Rajshahi</p>
+      <p><strong>Phone: </strong>01771431724, 01521768694</p>
+      <p><strong>Open: </strong>10am-10pm, Sat-Thu</p>
 
-            <div class="follow">
-                <h4>Follow us</h4>
-                <div class="icon">
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-youtube"></i>
-                </div>
-            </div>
+      <div class="follow">
+        <h4>Follow us</h4>
+        <div class="icon">
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-x-twitter"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-youtube"></i>
         </div>
+      </div>
+    </div>
 
-        <div class="col">
-            <h4>About</h4>
-            <a href="#">About us</a>
-            <a href="#">Delivary Information</a>
-            <a href="#">Privacy ploicy</a>
-            <a href="#">Trams & contidions</a>
-            <a href="#">Contact us</a>
-        </div>
+    <div class="col">
+      <h4>About</h4>
+      <a href="about.php">About us</a>
+      <a href="#">Delivary Information</a>
+      <a href="#">Privacy ploicy</a>
+      <a href="#">Trams & contidions</a>
+      <a href="contact.php">Contact us</a>
+    </div>
 
-        <div class="col">
-            <h4>My Account</h4>
-            <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
-            <a href="#">My Wishlist</a>
-            <a href="#">Track my order</a>
-            <a href="#">Help</a>
-        </div>
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="#">Sign In</a>
+      <a href="cart.php">View Cart</a>
+      <a href="#">My Wishlist</a>
+      <a href="#">Track my order</a>
+      <a href="#">Help</a>
+    </div>
 
-        <div class="col install">
-            <h4>Install app</h4>
-            <p>From App Store or Google Play</p>
-            <div class="row">
-                <img src="img/pay/app.jpg" />
-                <img src="img/pay/play.jpg" />
-            </div>
-            <div>
-                <p>Secured payment gateway</p>
-                <img src="img/pay/pay.png" />
-            </div>
-        </div>
-    </footer>
+    <div class="col install">
+      <h4>Install app</h4>
+      <p>From App Store or Google Play</p>
+      <div class="row">
+        <img src="img/pay/app.jpg" />
+        <img src="img/pay/play.jpg" />
+      </div>
+      <div>
+        <p>Secured payment gateway</p>
+        <img src="img/pay/pay.png" />
+      </div>
+    </div>
+  </footer>
 
-    <script src="script.js"></script>
 </body>
 
 </html>

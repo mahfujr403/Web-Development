@@ -35,8 +35,8 @@ function updateSubtotal(inputField) {
   const price = priceElement ? parseFloat(priceElement.value) : 0;
   const subtotal = price * quantity;
 
-  const subtotalElement = document.getElementById(`subtotal-${productId}`);
-  subtotalElement.textContent = `৳${subtotal}`;
+  const cartToal = document.getElementById(`subtotal-${productId}`);
+  cartToal.textContent = `৳${cartItemCount}`;
 
   updateCartSubtotalAndDiscount();
 }

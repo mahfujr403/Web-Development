@@ -5,6 +5,7 @@ $conn = new  mysqli('localhost', 'root', '', 'product');
 $sql_cart = "SELECT * FROM cart";
 $item  = $conn->query($sql_cart);
 
+$cartItemCount = mysqli_num_rows($item);
 ?>
 
 
@@ -37,7 +38,8 @@ $item  = $conn->query($sql_cart);
                 <li>
                     <a class="active" href="cart.php">
                         <i class="fa-solid fa-bag-shopping"></i>
-                    </a>
+                        <span class="count"><?php echo $cartItemCount; ?></span>
+                        </a>
                 </li>
             </ul>
         </div>
@@ -136,9 +138,9 @@ $item  = $conn->query($sql_cart);
 
             </table>
             <?php
-            if (mysqli_num_rows($item) > 0){
+            if (mysqli_num_rows($item) > 0) {
                 echo ' <button class="normal">Proceed to Checkout</button>';
-            }             
+            }
             ?>
         </div>
 

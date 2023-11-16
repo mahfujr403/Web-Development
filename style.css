@@ -111,6 +111,21 @@ body {
   transition: 300ms ease;
 }
 
+
+#navbar li a .count {
+  display: inline-block;
+  background-color: #08811e;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+ bottom: 7px;
+  /* top: 15px; */
+  right: 7px;
+  font-size: 12px;
+}
+
+
 #navbar li a:hover,
 #navbar li a.active {
   color: #088178;

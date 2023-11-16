@@ -5,7 +5,10 @@ $conn = new  mysqli('localhost', 'root', '', 'product');
 $sql_featured = "SELECT * FROM all_products";
 $item  = $conn->query($sql_featured);
 
+$sql_cart = "SELECT * FROM cart";
+$cartItem  = $conn->query($sql_cart);
 
+require_once("get_cart.php")
 
 ?>
 
@@ -34,11 +37,13 @@ $item  = $conn->query($sql_featured);
         <li>
           <a href="cart.php">
             <i class="fa-solid fa-bag-shopping"></i>
+            <span class="count"><?php echo $cartItemCount; ?></span>
           </a>
         </li>
       </ul>
     </div>
   </section>
+
 
   <section id="page-header">
     <h2>#Purchase from Home</h2>
@@ -52,7 +57,7 @@ $item  = $conn->query($sql_featured);
       while ($row = mysqli_fetch_assoc($item)) {
       ?>
         <div class="pro">
-           <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
+          <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
           <div onclick="window.location.href='sproduct.php'" class="des">
             <span><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
@@ -108,7 +113,7 @@ $item  = $conn->query($sql_featured);
     </div>
   </section>
 
-   <footer class="section-p1">
+  <footer class="section-p1">
     <div class="col">
       <img src="img/logo.png" class="logo" />
       <h4>Contact</h4>
@@ -160,6 +165,8 @@ $item  = $conn->query($sql_featured);
   </footer>
 
   <script src="sendtoserver.js"></script>
+  <script src="get_cart.js"></script>
+
 </body>
 
 </html>

@@ -5,6 +5,7 @@ $conn = new  mysqli('localhost', 'root', '', 'others');
 $sql = "SELECT * FROM blog_page";
 $item  = $conn->query($sql);
 
+require_once("get_cart.php")
 ?>
 
 
@@ -13,84 +14,85 @@ $item  = $conn->query($sql);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fashtech</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashtech</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
 </head>
 
 <body>
-    <section id="header">
-        <a href="index.php"><img src="img/logo.png" class="logo" alt /></a>
+  <section id="header">
+    <a href="index.php"><img src="img/logo.png" class="logo" alt /></a>
 
-        <div>
-            <ul id="navbar">
-                <li><a href="index.php"> Home</a></li>
-                <li><a href="shop.php"> Shop</a></li>
-                <li><a class="active" href="blog.php"> Blog</a></li>
-                <li><a href="about.php"> About</a></li>
-                <li><a href="contact.php"> Contact</a></li>
-                <li>
-                    <a href="cart.php">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </a>
-                </li>
-            </ul>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.php"> Home</a></li>
+        <li><a href="shop.php"> Shop</a></li>
+        <li><a class="active" href="blog.php"> Blog</a></li>
+        <li><a href="about.php"> About</a></li>
+        <li><a href="contact.php"> Contact</a></li>
+        <li>
+          <a href="cart.php">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="count"><?php echo $cartItemCount; ?></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="page-header" class="blog-header">
+    <h2>#readmore</h2>
+    <p>read more about our products!</p>
+  </section>
+
+  <section id="blog">
+
+    <?php
+    while ($row = mysqli_fetch_assoc($item)) {
+    ?>
+      <div class="blog-box">
+        <div class="blog-img">
+          <img src="<?php echo $row["image"] ?>" alt="">
         </div>
-    </section>
-
-    <section id="page-header" class="blog-header">
-        <h2>#readmore</h2>
-        <p>read more about our products!</p>
-    </section>
-
-    <section id="blog">
-
-        <?php
-        while ($row = mysqli_fetch_assoc($item)) {
-        ?>
-            <div class="blog-box">
-                <div class="blog-img">
-                    <img src="<?php echo $row["image"] ?>" alt="">
-                </div>
-                <div class="blog-details">
-                    <h4><?php echo $row["heading"] ?></h4>
-                    <p><?php echo $row["detail"] ?></p>
-                    <a href="#">Continue Reading</a>
-                </div>
-                <h1><?php echo $row["date"] ?></h1>
-            </div>
-        <?php
-        }
-        ?>
-
-
-
-    </section>
-
-
-    <section id="travers" class="section-p1">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#"><i class="fa-solid fa-angle-right"></i></a>
-    </section>
-
-    <section id="newsletter" class="section-p1">
-        <div class="newstext">
-            <h4>Sign Up For Newsletters</h4>
-            <p>
-                Get e-mail updates about our leatest shop and
-                <span>special offers.</span>
-            </p>
+        <div class="blog-details">
+          <h4><?php echo $row["heading"] ?></h4>
+          <p><?php echo $row["detail"] ?></p>
+          <a href="#">Continue Reading</a>
         </div>
-        <div class="form">
-            <input type="email" placeholder="Your e-mail address" />
-            <button class="normal">Sign Up</button>
-        </div>
-    </section>
+        <h1><?php echo $row["date"] ?></h1>
+      </div>
+    <?php
+    }
+    ?>
 
-     <footer class="section-p1">
+
+
+  </section>
+
+
+  <section id="travers" class="section-p1">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#"><i class="fa-solid fa-angle-right"></i></a>
+  </section>
+
+  <section id="newsletter" class="section-p1">
+    <div class="newstext">
+      <h4>Sign Up For Newsletters</h4>
+      <p>
+        Get e-mail updates about our leatest shop and
+        <span>special offers.</span>
+      </p>
+    </div>
+    <div class="form">
+      <input type="email" placeholder="Your e-mail address" />
+      <button class="normal">Sign Up</button>
+    </div>
+  </section>
+
+  <footer class="section-p1">
     <div class="col">
       <img src="img/logo.png" class="logo" />
       <h4>Contact</h4>
@@ -141,7 +143,8 @@ $item  = $conn->query($sql);
     </div>
   </footer>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
+  <script src="get_cart.js"></script>
 </body>
 
 </html>

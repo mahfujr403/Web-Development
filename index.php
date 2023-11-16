@@ -3,7 +3,11 @@
 $conn = new  mysqli('localhost', 'root', '', 'product');
 $sql_featured = "SELECT * FROM all_products";
 $item  = $conn->query($sql_featured);
+
+require_once("get_cart.php");
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,26 +27,29 @@ $item  = $conn->query($sql_featured);
 
     <div>
       <ul id="navbar">
-        <li><a class="active" href="index.php"> Home</a></li>
+        <li>
+          <a class="active" href="index.php"> Home</a>
+        </li>
         <li><a href="shop.php"> Shop</a></li>
         <li><a href="blog.php"> Blog</a></li>
         <li><a href="about.php"> About</a></li>
         <li><a href="contact.php"> Contact</a></li>
         <li>
           <a href="cart.php">
-            <span id="badge"><i class="fa-solid fa-bag-shopping"></i></span>
-
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="count"><?php echo $cartItemCount; ?></span>
           </a>
         </li>
       </ul>
     </div>
   </section>
+
   <section id="hero">
     <h4>Trade-in-offer</h4>
     <h2>Super value deals</h2>
     <h1>On all products</h1>
     <p>Save more with coupons & up to 70% off!</p>
-    <a href="shop.php"><button>Shop Now</button></a>  
+    <a href="shop.php"><button>Shop Now</button></a>
   </section>
 
   <section id="feature" class="section-p1">
@@ -88,7 +95,7 @@ $item  = $conn->query($sql_featured);
       ?>
         <div class="pro">
           <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
-          <div  onclick="window.location.href='sproduct.php'" class="des">
+          <div onclick="window.location.href='sproduct.php'" class="des">
             <span><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
@@ -138,7 +145,7 @@ $item  = $conn->query($sql_featured);
       ?>
         <div class="pro">
           <img onclick="window.location.href='sproduct.php?id=<?php echo $row["id"] ?>'" src="img\products\<?php echo $row["image"] ?>" alt="" />
-          <div  onclick="window.location.href='sproduct.php'" class="des">
+          <div onclick="window.location.href='sproduct.php'" class="des">
             <span name="add_brand"><?php echo $row["brand"] ?></span>
             <h5><?php echo $row["name"] ?></h5>
             <div class="star">
@@ -161,7 +168,7 @@ $item  = $conn->query($sql_featured);
             </div>
             <h4>৳<?php echo $row["price"] ?></h4>
           </div>
-          <button  class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
+          <button class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
         </div>
 
       <?php
@@ -269,6 +276,8 @@ $item  = $conn->query($sql_featured);
 
 
   <script src="sendtoserver.js"></script>
+  <script src="get_cart.js"></script>
+  
 </body>
 
 </html>

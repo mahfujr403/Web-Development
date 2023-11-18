@@ -37,7 +37,11 @@ require_once("get_cart.php")
         <li>
           <a href="cart.php">
             <i class="fa-solid fa-bag-shopping"></i>
-            <span class="count"><?php echo $cartItemCount; ?></span>
+            <?php
+            if ($cartItemCount > 0) {
+              echo '<span class="count">' . $cartItemCount . '</span>';
+            }
+            ?>
           </a>
         </li>
       </ul>

@@ -123,6 +123,7 @@ require_once("get_cart.php");
             <h4>৳<?php echo $row["price"] ?></h4>
           </div>
           <button class="add normal" data-id="<?php echo $row["id"] ?>" data-name="<?php echo $row["name"] ?>" data-brand="<?php echo $row["brand"] ?>" data-image="<?php echo $row["image"] ?>" data-price="<?php echo $row["price"] ?>" data-rating="<?php echo $row["rating"] ?>">Add to Cart</button>
+
         </div>
       <?php
 

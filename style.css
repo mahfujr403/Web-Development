@@ -885,22 +885,19 @@ footer a:hover {
 }
 
 #cart table td:nth-child(3) {
-  width: 250px;
+  width: 300px;
   text-align: center;
 }
 
 #cart table td:nth-child(4),
-#cart table td:nth-child(5),
-#cart table td:nth-child(6) {
+#cart table td:nth-child(5) {
   width: 150px;
   text-align: center;
 }
 
-#cart table td:nth-child(5) input {
-  width: 70px;
-  height: 30px;
-  padding: 10px 5px 7px 15px;
-  margin-bottom: 5px;
+#cart table td:nth-child(6) {
+  width: 200px;
+  text-align: center;
 }
 
 #cart table thead {

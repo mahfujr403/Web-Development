@@ -1,3 +1,15 @@
+<?php
+
+$conn = new  mysqli('localhost', 'root', '', 'product');
+
+$sql_featured = "SELECT * FROM all_products";
+$item  = $conn->query($sql_featured);
+
+$sql_cart = "SELECT * FROM cart";
+$cartItem  = $conn->query($sql_cart);
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -7,7 +19,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fashtech</title>
-    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="admin_product.css" />
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" />
 </head>
 
@@ -89,48 +102,76 @@
             </li>
         </ul>
     </div>
-    </ul>
-    </div>
+
 
     <div class="home_content">
-        <div class="text">
-            <header id="showcase" class="container">
-                <h1>Welcome to my website</h1>
-            </header>
-            <div id="content" class="container">
-                <h5>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit natus sed neque? Nostrum
-                    praesentium inventore sit soluta, voluptates officia in repellendus, laudantium cupiditate
-                    itaque officiis culpa corporis at veritatis dignissimos? Placeat, iure cum beatae doloremque
-                    molestiae possimus, explicabo, accusantium minus consequatur aperiam culpa deleniti fugit
-                    reprehenderit odio animi laboriosam aut.
-                </h5>
-                <a href="#" class="btn">Read More</a>
+        <section class="display-product-table">
 
-            </div>
-        </div>
+            <table>
+                <thead>
+                    <th>product image</th>
+                    <th>product brand</th>
+                    <th>product name</th>
+                    <th>product price</th>
+                    <th>product rating</th>
+                    <th>action</th>
+                </thead>
+
+                <tbody>
+                    <?php
+
+                    if (mysqli_num_rows($item) > 0) {
+                        while ($row = mysqli_fetch_assoc($item)) { ?>
+                            <tr>
+                                <td>
+                                    <img src="img/products/<?php echo $row["image"] ?>" alt="">
+                                </td>
+                                <td><?php echo $row["brand"] ?></td>
+                                <td><?php echo $row["name"] ?></td>
+                                <td>৳<?php echo $row["price"] ?></td>
+                                <td><?php echo $row["rating"] ?></td>
+                                <td>
+                                    <button name="edit" class="edit_db">
+                                        <i data-id="<?php echo $row["id"] ?>" class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="dlt_db">
+                                        <i data-id="<?php echo $row["id"] ?>" class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </td>
+
+                            </tr>
+                        <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td colspan="7"> <span>No item in Database</span></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+            
+            <?php
+            if (isset($_POST['edit'])) {
+                echo "colsol.log('button clicked')";
+            }
+            ?>
+
+        </section>
+
+
     </div>
 
 
 
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
-        let searchBtn = document.querySelector(".bx-search");
-
-        btn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-        searchBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-    </script>
-
+    <!-- <script src="updateproduct.js"></script> -->
+    <script src="dlt_pro_db.js"></script>
+    <script src="cart.js"></script>
 </body>
 
-<body>
 
-
-</body>
 
 </html>

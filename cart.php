@@ -36,7 +36,7 @@ $cartItemCount = mysqli_num_rows($item);
                 <li><a href="about.php"> About</a></li>
                 <li><a href="contact.php"> Contact</a></li>
                 <li>
-                    <a href="cart.php">
+                    <a class="active" href="cart.php">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <?php
                         if ($cartItemCount > 0) {
